@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Query Tester</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 40px;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+        pre {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container mt-5">
+            <h2 class="text-center mb-4">Django Query Tester</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="queryset" class="form-label">Enter a Django Queryset</label>
+                    {{ form.queryset }}
+                </div>
+                <button type="submit" class="btn btn-custom w-100">Run Query</button>
+            </form>
+
+            {% if result %}
+                <div class="mt-4">
+                    <h4>Results:</h4>
+                    <pre>{{ result }}</pre>
+                </div>
+                <div class="alert alert-success">
+                    <strong>Execution Time:</strong> {{ execution_time|floatformat:3 }} seconds
+                </div>
+            {% endif %}
+
+            {% if error %}
+                <div class="alert alert-danger">
+                    <h4>Error:</h4>
+                    <pre>{{ error }}</pre>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
